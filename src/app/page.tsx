@@ -125,7 +125,12 @@ export default function Home() {
   const [password, setPassword] = useState("");
   const [authMessage, setAuthMessage] = useState<string | null>(null);
 
-  const [meta, setMeta] = useState<MetaForm | null>(null);
+  const [meta, setMetaState] = useState<MetaForm | null>(null);
+  const [metaError, setMetaError] = useState<string | null>(null);
+  const setMeta = (value: MetaForm | null) => {
+    setMetaState(value);
+    setMetaError(null);
+  };
 
   const [studyDeck, setStudyDeck] = useState<DeckRow | null>(null);
   const [studyCards, setStudyCards] = useState<CardRow[]>([]);
@@ -243,8 +248,9 @@ export default function Home() {
             .from("decks")
             .insert({ ...values, owner_id: user.id, folder_id: selectedFolderKey }));
     }
-    if (error) return setNotice(error.message);
+    if (error) return setMetaError(error.message);
     setMeta(null);
+    setMetaError(null);
     setNotice(null);
     reload();
   };
@@ -717,6 +723,7 @@ export default function Home() {
               />
               Publish publicly
             </label>
+            {metaError && <p className="text-sm text-amber-300">{metaError}</p>}
             <div className="flex justify-end gap-3">
               <button type="button" className={btnGhost} onClick={() => setMeta(null)}>
                 Cancel
