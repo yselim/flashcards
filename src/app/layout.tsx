@@ -14,16 +14,16 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Flashcard Studio",
-  description: "A Supabase-powered flashcard dashboard and study experience.",
+  description: "Kategoriler ve quizlerle çalışabileceğin flashcard uygulaması.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
-      lang="en"
+      lang="tr"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full bg-slate-950 text-slate-50">{children}</body>
+      <body className="min-h-full bg-slate-900 text-slate-50">{children}</body>
     </html>
   );
 }
